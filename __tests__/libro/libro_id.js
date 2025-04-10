@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../../app'); // corregida la ruta
 
 describe('🔎 Obtener libro por ID', () => {
-  let libroId = 1; // Asegurate de que este ID exista. Podés ajustarlo según el ID que se cree en tus tests anteriores.
+  let libroId = 40; // Asegurate de que este ID exista. Podés ajustarlo según el ID que se cree en tus tests anteriores.
 
   it('debería devolver el libro con el ID especificado', async () => {
     const res = await request(app).get(`/libro/${libroId}`);

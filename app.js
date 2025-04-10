@@ -8,7 +8,8 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const libroRouter = require('./routes/libro');
-const authRoutes = require('./routes/auth'); // Asegúrate que este archivo exista
+const authRoutes = require('./routes/auth');
+const carritoRoutes = require('./routes/carrito'); 
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/libro', libroRouter);
 app.use('/auth', authRoutes);
+app.use('/carrito', carritoRoutes);
 
 // Manejo de error 404
 app.use((req, res, next) => {

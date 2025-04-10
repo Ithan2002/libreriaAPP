@@ -4,9 +4,9 @@ const app = require('../../app'); // Ruta a tu archivo principal de Express
 describe('🧪 Crear libro', () => {
   it('debería agregar un libro correctamente', async () => {
     const nuevoLibro = {
-      title: 'Cien años de soledad',
-      author: 'Gabriel García Márquez',
-      category: 'Realismo mágico'
+      title: 'movidik',
+      author: 'messi',
+      category: 'mágico'
     };
 
     const res = await request(app)

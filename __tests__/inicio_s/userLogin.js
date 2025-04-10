@@ -26,4 +26,3 @@ describe('🧪 User Login', () => {
     expect(response.body).toHaveProperty('message', 'Credenciales inválidas');
   });
 });
-

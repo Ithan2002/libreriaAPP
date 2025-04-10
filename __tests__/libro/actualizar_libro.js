@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../../app'); // Ajustá si tu archivo app.js está en otra ruta
 
 describe('✏️ Actualizar libro', () => {
-  let libroId;
+  let libroId = 40;
 
   beforeAll(async () => {
     // Crear un libro primero para poder actualizarlo
