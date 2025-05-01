@@ -6,8 +6,8 @@ const endPointsFiles = ['./app.js'];
 
 const doc = {
   info: {
-    title: 'API Samyangels',
-    description: 'Documentación generada automáticamente para el proyecto Samyangels',
+    title: 'API LibreriaApp',
+    description: 'Documentación generada automáticamente para el proyecto libreriaApp',
   },
   host: 'localhost:3000',
   schemes: ['http'],
