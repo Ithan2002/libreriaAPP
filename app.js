@@ -4,6 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+
+
 // Rutas
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -12,6 +14,13 @@ const authRoutes = require('./routes/auth');
 const carritoRoutes = require('./routes/carrito'); 
 
 const app = express();
+
+//swagger
+// Swagger: documentación de la API
+const swaggerUI = require('swagger-ui-express');
+const swaggerDocument = require('./config/swagger.json');
+app.use('/document', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
 
 // Configuración de vistas
 app.set('views', path.join(__dirname, 'views'));
@@ -23,6 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Rutas
 app.use('/', indexRouter);
