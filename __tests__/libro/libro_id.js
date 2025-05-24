@@ -1,10 +1,21 @@
 const request = require('supertest');
-const app = require('../../app'); // corregida la ruta
+const app = require('../../app');
+const { Libro } = require('../../models');
 
-describe('🔎 Obtener libro por ID', () => {
-  let libroId = 40; // Asegurate de que este ID exista. Podés ajustarlo según el ID que se cree en tus tests anteriores.
+describe('GET /libro/:id - Obtener libro por ID', () => {
+  let libroId;
 
-  it('debería devolver el libro con el ID especificado', async () => {
+  beforeAll(async () => {
+    const libroExistente = await Libro.findOne();
+
+    if (!libroExistente) {
+      throw new Error('⚠️ No hay libros en la base de datos. Por favor agrega al menos uno para ejecutar este test.');
+    }
+
+    libroId = libroExistente.id;
+  });
+
+  test('debería devolver el libro con el ID especificado', async () => {
     const res = await request(app).get(`/libro/${libroId}`);
 
     expect(res.statusCode).toBe(200);
@@ -15,8 +26,8 @@ describe('🔎 Obtener libro por ID', () => {
     expect(res.body.libro).toHaveProperty('category');
   });
 
-  it('debería devolver 404 si el libro no existe', async () => {
-    const res = await request(app).get('/libro/99999'); // ID que no existe
+  test('debería devolver 404 si el libro no existe', async () => {
+    const res = await request(app).get('/libro/999999');
 
     expect(res.statusCode).toBe(404);
     expect(res.body).toHaveProperty('error', 'Libro no encontrado');

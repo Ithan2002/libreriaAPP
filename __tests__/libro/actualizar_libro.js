@@ -1,26 +1,43 @@
 const request = require('supertest');
-const app = require('../../app'); // Ajustá si tu archivo app.js está en otra ruta
+const app = require('../../app');
+const { Libro } = require('../../models');
 
-describe('✏️ Actualizar libro', () => {
-  let libroId = 40;
+describe('PUT /libro/:id - Actualizar un libro', () => {
+  let libroId;
 
   beforeAll(async () => {
-    // Crear un libro primero para poder actualizarlo
-    const res = await request(app).post('/libro').send({
-      title: 'Libro original',
-      author: 'Autor original',
-      category: 'Categoría original'
-    });
-    libroId = res.body.libro.id;
+    // Buscar un libro ya existente
+    const libroExistente = await Libro.findOne();
+
+    if (!libroExistente) {
+      throw new Error('⚠️ No hay libros en la base de datos. Agrega al menos uno para ejecutar este test.');
+    }
+
+    libroId = libroExistente.id;
   });
 
-  it('debería actualizar el título de un libro existente', async () => {
+  test('debería actualizar el título de un libro existente', async () => {
+    const nuevoTitulo = `Libro actualizado ${Date.now()}`;
+
     const res = await request(app)
       .put(`/libro/${libroId}`)
-      .send({ title: 'Libro actualizado' });
+      .send({ title: nuevoTitulo });
 
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty('message', 'Libro actualizado');
-    expect(res.body.libro).toHaveProperty('title', 'Libro actualizado');
+    expect(res.body.libro).toHaveProperty('title', nuevoTitulo);
+
+    const libroEnDB = await Libro.findByPk(libroId);
+    expect(libroEnDB.title).toBe(nuevoTitulo);
+  });
+
+  test('debería devolver 404 si el libro no existe', async () => {
+    const idInexistente = 999999;
+    const res = await request(app)
+      .put(`/libro/${idInexistente}`)
+      .send({ title: 'No existe' });
+
+    expect(res.statusCode).toBe(404);
+    expect(res.body.error).toBe('Libro no encontrado');
   });
 });

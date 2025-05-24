@@ -18,6 +18,11 @@ const Book = sequelize.define('Book', {
   author: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  stock: { // 👈 Campo agregado
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0
   }
 });
 

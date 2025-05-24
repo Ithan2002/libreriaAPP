@@ -1,4 +1,5 @@
 const Book = require('../models/libro');
+const { Op } = require('sequelize');
 
 // ✅ Crear un nuevo libro
 exports.createBook = async (req, res) => {
@@ -61,4 +62,14 @@ exports.deleteBook = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+};
+
+exports.getAvailableBooks = async (req, res) => {
+  const libros = await Book.findAll({ where: { stock: { [Op.gt]: 0 } } });
+  res.status(200).json(libros);
+};
+
+exports.getOutOfStockBooks = async (req, res) => {
+  const libros = await Book.findAll({ where: { stock: 0 } });
+  res.status(200).json(libros);
 };

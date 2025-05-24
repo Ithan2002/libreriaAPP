@@ -6,8 +6,8 @@ describe('🧪 User Login', () => {
     const response = await request(app)
       .post('/login')
       .send({
-        username: 'testUser',
-        password: 'testPass' // La contraseña original antes de ser hasheada
+        username: 'usertestOne',
+        password: '1234567' // La contraseña original antes de ser hasheada
       });
 
     expect(response.status).toBe(200);

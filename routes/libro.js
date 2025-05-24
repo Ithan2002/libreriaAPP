@@ -5,6 +5,11 @@ const libroController = require('../controllers/librocontroller');
 // Crea un libro
 router.post('/', libroController.createBook);
 
+router.get('/estado/disponibles', libroController.getAvailableBooks);
+router.get('/estado/agotados', libroController.getOutOfStockBooks);
+
+
+
 // Obtiene todos los libros
 router.get('/', libroController.getAllBooks);
 

@@ -12,7 +12,8 @@ const usersRouter = require('./routes/users');
 const libroRouter = require('./routes/libro');
 const authRoutes = require('./routes/auth');
 const carritoRoutes = require('./routes/carrito'); 
-
+const pedidoRoutes = require('./routes/pedido');
+const detallePedidoRoutes = require('./routes/detallePedido');
 const app = express();
 
 //swagger
@@ -40,6 +41,10 @@ app.use('/users', usersRouter);
 app.use('/libro', libroRouter);
 app.use('/auth', authRoutes);
 app.use('/carrito', carritoRoutes);
+app.use('/pedido', pedidoRoutes);
+app.use('/api/detalle-pedidos', detallePedidoRoutes);
+
+
 
 // Manejo de error 404
 app.use((req, res, next) => {

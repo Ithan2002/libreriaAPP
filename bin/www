@@ -8,6 +8,8 @@ var app = require('../app');
 var debug = require('debug')('appx:server');
 var http = require('http');
 var sequelize = require('../config/database');
+require("../models");  //se utiliza para registrar los modelos
+
 
 /**
  * Get port from environment and store in Express.
@@ -23,7 +25,7 @@ app.set('port', port);
 var server = http.createServer(app);
 
 /* Synchronize DB and then start the server */
-sequelize.sync().then(() => {
+sequelize.sync({alter: true }).then(() => {
   console.log('Base de datos sincronizada');
   server.listen(port);
   server.on('error', onError);
