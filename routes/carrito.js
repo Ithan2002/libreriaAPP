@@ -9,17 +9,17 @@ const carritoController = require('../controllers/carrito.controller');
  *     LibroCarrito:
  *       type: object
  *       required:
- *         - libroId
+ *         - idLibro
  *         - cantidad
  *       properties:
- *         libroId:
+ *         idLibro:
  *           type: integer
  *           description: ID del libro agregado al carrito
  *         cantidad:
  *           type: integer
  *           description: Cantidad del libro
  *       example:
- *         libroId: 3
+ *         idLibro: 3
  *         cantidad: 2
  * 
  *     ItemCarrito:
@@ -27,13 +27,13 @@ const carritoController = require('../controllers/carrito.controller');
  *       properties:
  *         id:
  *           type: integer
- *         libroId:
+ *         idLibro:
  *           type: integer
  *         cantidad:
  *           type: integer
  *       example:
  *         id: 1
- *         libroId: 3
+ *         idLibro: 3
  *         cantidad: 2
  */
 

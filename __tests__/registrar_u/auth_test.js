@@ -3,9 +3,9 @@ const app = require('../../app');
 
 describe('🧪 Registro e inicio de sesión', () => {
   const userData = {
-    username: 'usertestsix',
+    username: 'usertestXX',
     password: '1234567',
-    email: 'usertestsix@test.com'
+    email: 'usertestXX@test.com'
   };
 
   test('Registro exitoso', async () => {

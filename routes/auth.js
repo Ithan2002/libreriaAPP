@@ -1,17 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/auth.controller');
-
 /**
  * @swagger
  * components:
  *   schemas:
- *     AuthRequest:
+ *     RegisterRequest:
  *       type: object
  *       required:
+ *         - username
  *         - email
  *         - password
  *       properties:
+ *         username:
+ *           type: string
+ *           description: Nombre de usuario único
  *         email:
  *           type: string
  *           format: email
@@ -21,21 +24,39 @@ const authController = require('../controllers/auth.controller');
  *           format: password
  *           description: Contraseña del usuario
  *       example:
+ *         username: usuario1
  *         email: usuario@example.com
  *         password: 123456
- * 
+ *
+ *     LoginRequest:
+ *       type: object
+ *       required:
+ *         - username
+ *         - password
+ *       properties:
+ *         username:
+ *           type: string
+ *           description: Nombre de usuario registrado
+ *         password:
+ *           type: string
+ *           format: password
+ *           description: Contraseña del usuario
+ *       example:
+ *         username: usuario1
+ *         password: 123456
+ *
  *     AuthResponse:
  *       type: object
  *       properties:
  *         token:
  *           type: string
  *           description: Token JWT para autenticación
- *         mensaje:
+ *         message:
  *           type: string
  *           description: Mensaje de éxito
  *       example:
  *         token: eyJhbGciOiJIUzI1NiIsInR...
- *         mensaje: Autenticación exitosa
+ *         message: login exitoso
  */
 
 /**
@@ -56,21 +77,25 @@ const authController = require('../controllers/auth.controller');
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/AuthRequest'
+ *             $ref: '#/components/schemas/RegisterRequest'
  *     responses:
  *       201:
  *         description: Usuario registrado exitosamente
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/AuthResponse'
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: registro exitoso
  *       400:
- *         description: Datos inválidos
+ *         description: El usuario ya existe
  *       500:
  *         description: Error del servidor
  */
-
 router.post('/register', authController.register);
+
 /**
  * @swagger
  * /auth/login:
@@ -82,7 +107,7 @@ router.post('/register', authController.register);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/AuthRequest'
+ *             $ref: '#/components/schemas/LoginRequest'
  *     responses:
  *       200:
  *         description: Usuario autenticado exitosamente
@@ -91,7 +116,9 @@ router.post('/register', authController.register);
  *             schema:
  *               $ref: '#/components/schemas/AuthResponse'
  *       401:
- *         description: Credenciales incorrectas
+ *         description: Contraseña incorrecta
+ *       404:
+ *         description: Usuario no encontrado
  *       500:
  *         description: Error del servidor
  */

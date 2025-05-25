@@ -74,7 +74,7 @@ const detallePedidoController = require('../controllers/detallePedidoController'
 
 /**
  * @swagger
- * /detallePedido/factura/{pedidoId}:
+ * /api/detalle-pedidos/factura/{pedidoId}:
  *   get:
  *     summary: Obtiene la factura de un pedido específico
  *     tags: [DetallePedido]

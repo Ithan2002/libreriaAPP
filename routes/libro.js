@@ -9,42 +9,46 @@ const libroController = require('../controllers/librocontroller');
  *     Libro:
  *       type: object
  *       required:
- *         - titulo
- *         - autor
- *         - stock
+ *         - title
+ *         - author
+ *         - category
  *       properties:
  *         id:
  *           type: integer
  *           description: ID autogenerado del libro
- *         titulo:
+ *         title:
  *           type: string
  *           description: Título del libro
- *         autor:
+ *         author:
  *           type: string
  *           description: Autor del libro
+ *         category:
+ *           type: string
+ *           description: Categoría del libro
  *         stock:
  *           type: integer
  *           description: Cantidad en inventario
  *       example:
  *         id: 1
- *         titulo: "El arte de la guerra"
- *         autor: "Sun Tzu"
+ *         title: "El arte de la guerra"
+ *         author: "Sun Tzu"
+ *         category: "Estrategia"
  *         stock: 10
  */
 
 /**
  * @swagger
  * tags:
- *   name: Libros
+ *   name: Libro
  *   description: API para gestionar libros
  */
 
 /**
  * @swagger
- * /libros:
+ * /libro:
  *   post:
  *     summary: Crea un nuevo libro
- *     tags: [Libros]
+ *     tags: [Libro]
  *     requestBody:
  *       required: true
  *       content:
@@ -62,15 +66,14 @@ const libroController = require('../controllers/librocontroller');
  *         description: Datos inválidos
  */
 
-// Crea un libro
 router.post('/', libroController.createBook);
 
 /**
  * @swagger
- * /libros/estado/disponibles:
+ * /libro/estado/disponibles:
  *   get:
  *     summary: Obtiene libros disponibles en stock
- *     tags: [Libros]
+ *     tags: [Libro]
  *     responses:
  *       200:
  *         description: Lista de libros disponibles
@@ -81,14 +84,14 @@ router.post('/', libroController.createBook);
  *               items:
  *                 $ref: '#/components/schemas/Libro'
  */
-
 router.get('/estado/disponibles', libroController.getAvailableBooks);
+
 /**
  * @swagger
- * /libros/estado/agotados:
+ * /libro/estado/agotados:
  *   get:
  *     summary: Obtiene libros agotados
- *     tags: [Libros]
+ *     tags: [Libro]
  *     responses:
  *       200:
  *         description: Lista de libros agotados
@@ -100,12 +103,13 @@ router.get('/estado/disponibles', libroController.getAvailableBooks);
  *                 $ref: '#/components/schemas/Libro'
  */
 router.get('/estado/agotados', libroController.getOutOfStockBooks);
+
 /**
  * @swagger
- * /libros:
+ * /libro:
  *   get:
  *     summary: Obtiene todos los libros
- *     tags: [Libros]
+ *     tags: [Libro]
  *     responses:
  *       200:
  *         description: Lista de todos los libros
@@ -116,17 +120,14 @@ router.get('/estado/agotados', libroController.getOutOfStockBooks);
  *               items:
  *                 $ref: '#/components/schemas/Libro'
  */
-
-
-// Obtiene todos los libros
 router.get('/', libroController.getAllBooks);
 
 /**
  * @swagger
- * /libros/{id}:
+ * /libro/{id}:
  *   get:
  *     summary: Obtiene un libro por ID
- *     tags: [Libros]
+ *     tags: [Libro]
  *     parameters:
  *       - in: path
  *         name: id
@@ -144,15 +145,14 @@ router.get('/', libroController.getAllBooks);
  *       404:
  *         description: Libro no encontrado
  */
-
-// Obtiene un libro por ID
 router.get('/:id', libroController.getBookById);
+
 /**
  * @swagger
- * /libros/{id}:
+ * /libro/{id}:
  *   put:
  *     summary: Actualiza un libro por ID
- *     tags: [Libros]
+ *     tags: [Libro]
  *     parameters:
  *       - in: path
  *         name: id
@@ -176,15 +176,14 @@ router.get('/:id', libroController.getBookById);
  *       404:
  *         description: Libro no encontrado
  */
-
-// Actualiza un libro por ID
 router.put('/:id', libroController.updateBook);
+
 /**
  * @swagger
- * /libros/{id}:
+ * /libro/{id}:
  *   delete:
  *     summary: Elimina un libro por ID
- *     tags: [Libros]
+ *     tags: [Libro]
  *     parameters:
  *       - in: path
  *         name: id
@@ -198,8 +197,6 @@ router.put('/:id', libroController.updateBook);
  *       404:
  *         description: Libro no encontrado
  */
-
-// Elimina un libro por ID
 router.delete('/:id', libroController.deleteBook);
 
 module.exports = router;

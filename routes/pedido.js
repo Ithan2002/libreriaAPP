@@ -24,7 +24,7 @@ const pedidoController = require('../controllers/pedido.controller');
  *           items:
  *             type: object
  *             properties:
- *               libroId:
+ *               id:
  *                 type: integer
  *                 description: ID del libro
  *               cantidad:
@@ -34,9 +34,9 @@ const pedidoController = require('../controllers/pedido.controller');
  *         id: 1
  *         direccion: "Calle 123, Ciudad"
  *         libros:
- *           - libroId: 5
+ *           - id: 5
  *             cantidad: 2
- *           - libroId: 8
+ *           - id: 8
  *             cantidad: 1
  */
 
@@ -49,7 +49,7 @@ const pedidoController = require('../controllers/pedido.controller');
 
 /**
  * @swagger
- * /pedidos:
+ * /pedido:
  *   post:
  *     summary: Realiza un nuevo pedido
  *     tags: [Pedidos]
