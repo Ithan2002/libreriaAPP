@@ -15,6 +15,7 @@ const carritoRoutes = require('./routes/carrito');
 const pedidoRoutes = require('./routes/pedido');
 const detallePedidoRoutes = require('./routes/detallePedido');
 const app = express();
+const autenticación = require('./middlewares/autentificación')
 
 //swagger
 // Swagger: documentación de la API
@@ -33,7 +34,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(autenticación);
 
 // Rutas
 app.use('/', indexRouter);

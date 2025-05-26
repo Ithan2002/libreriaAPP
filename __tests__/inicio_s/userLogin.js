@@ -6,7 +6,7 @@ describe('🧪 User Login', () => {
     const response = await request(app)
       .post('/login')
       .send({
-        username: 'usertestOne',
+        username: 'usertests',
         password: '1234567' // La contraseña original antes de ser hasheada
       });
 

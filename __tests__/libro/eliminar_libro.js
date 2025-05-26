@@ -3,7 +3,7 @@ const app = require('../../app');
 const { Libro } = require('../../models');
 
 describe('DELETE /libro/:id - Eliminar un libro específico', () => {
-  const libroId = 263; // 🔧 Cambiá este valor por el ID del libro que querés eliminar
+  const libroId = 303; // 🔧 Cambiá este valor por el ID del libro que querés eliminar
 
   test('debería eliminar un libro existente y responder con 200', async () => {
     const res = await request(app).delete(`/libro/${libroId}`);

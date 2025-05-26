@@ -9,7 +9,10 @@ exports.getFactura = async (req, res) => {
     if (!pedido) {
       return res.status(404).json({ error: 'Pedido no encontrado' });
     }
-
+     // 🛡 Protección OWASP API1: Validar que el pedido pertenezca al usuario autenticado
+    if (pedido.usuario_id !== req.user.id) {
+      return res.status(403).json({ mensaje: 'No tiene permiso para ver este pedido' });
+    }
     const detalles = await DetallePedido.findAll({
       where: { pedido_id: pedidoId },
       include: {
