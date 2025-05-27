@@ -19,7 +19,7 @@ const Book = sequelize.define('Book', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  stock: { // 👈 Campo agregado
+  stock: { 
     type: DataTypes.INTEGER,
     allowNull: false,
     defaultValue: 0
